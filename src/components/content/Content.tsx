@@ -10,7 +10,7 @@ const Content = () => {
 
   const sortedData = user_data.sort((a, b) => b.pp - a.pp);
 
-  const [entryVisible, setEntryVisibility] = useState(true);
+  //const [entryVisible, setEntryVisibility] = useState(true);
   const entries = [];
   for (let i = 0; i < 1000; i++) {
     if (sortedData[i].username.toLowerCase().includes(inputText)) {
@@ -25,7 +25,7 @@ const Content = () => {
           <h3 className="">Player Leaderboards</h3>
           <input className="ms-auto w-50 form-control" id="search-input" type="search" placeholder="Search Username" onChange={handleSearchInput} />
         </div>
-        {entryVisible && entries}
+        {entries}
       </div>
       <p className="text-center my-2">Made by Nopey</p>
     </>
