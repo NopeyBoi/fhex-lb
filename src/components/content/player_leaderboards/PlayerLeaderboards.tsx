@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import LeaderboardEntry from "./leaderboard_entry/LeaderboardEntry";
-import user_data from "./user_data.json";
+import user_data from "../../../assets/user_data.json";
 
-const Content = () => {
+const PlayerLeaderboards = () => {
   const [inputText, setInputText] = useState("");
   const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value.toLowerCase());
@@ -10,7 +10,6 @@ const Content = () => {
 
   const sortedData = user_data.sort((a, b) => b.pp - a.pp);
 
-  //const [entryVisible, setEntryVisibility] = useState(true);
   const entries = [];
   for (let i = 0; i < 1000; i++) {
     if (sortedData[i].username.toLowerCase().includes(inputText)) {
@@ -23,7 +22,7 @@ const Content = () => {
       <div className="container p-2 pb-3 bg-body text-body rounded-bottom border border-top-0">
         <div className="d-flex px-2">
           <h3 className="">Player Leaderboards</h3>
-          <input className="ms-auto w-50 form-control" id="search-input" type="search" placeholder="Search Username" onChange={handleSearchInput} />
+          <input className="ms-auto w-50 form-control" type="search" placeholder="Search Username" onChange={handleSearchInput} />
         </div>
         {entries}
       </div>
@@ -32,4 +31,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default PlayerLeaderboards;
