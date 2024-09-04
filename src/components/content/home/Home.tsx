@@ -14,7 +14,7 @@ const Home = () => {
     user_list.push(
       <li className="d-flex list-group-item" key={user.uuid}>
         <span className="text-truncate fw-bold">{user.username}</span>
-        <span className="ms-auto fst-italic">{user.pp.toFixed(2)}pp</span>
+        <span className="ms-auto fst-italic">{user.pp.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}pp</span>
       </li>
     );
   }

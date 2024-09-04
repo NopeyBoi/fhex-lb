@@ -12,6 +12,8 @@ interface Props {
 const Navigation = ({ children, showHome, showPlb, onChange }: Props) => {
   const [cookies] = useCookies(["light_mode"]);
 
+  const light_mode_names = ["Light Mode", "Burn Retina Mode", "Flashbang Mode", "Don't activate this"];
+
   return (
     <nav className="navbar navbar-expand-lg sticky-top bg-body border-bottom border-body">
       <div className="container-fluid">
@@ -32,7 +34,7 @@ const Navigation = ({ children, showHome, showPlb, onChange }: Props) => {
             <div className="form-check form-check-reverse form-switch me-2">
               <input className="form-check-input" type="checkbox" role="switch" id="switchLightMode" defaultChecked={cookies.light_mode} onChange={onChange}></input>
               <label className="form-check-label" htmlFor="switchLightMode">
-                Light Mode
+                {light_mode_names[Math.floor(Math.random() * light_mode_names.length)]}
               </label>
             </div>
           </form>
