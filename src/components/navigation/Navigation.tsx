@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Navigation = ({ children, showHome, showPlb, onChange }: Props) => {
-  const [cookies, setCookie] = useCookies(["light_mode"]);
+  const [cookies] = useCookies(["light_mode"]);
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top bg-body border-bottom border-body">
