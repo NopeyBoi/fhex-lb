@@ -19,11 +19,10 @@ const PlayerLeaderboards = () => {
 
   return (
     <>
-      <div className="container p-2 pb-3 bg-body text-body rounded-bottom border border-top-0">
-        <div className="d-flex px-2">
-          <h3 className="">Player Leaderboards</h3>
-          <input className="ms-auto w-50 form-control" type="search" placeholder="Search Username" onChange={handleSearchInput} />
-        </div>
+      <div className="container p-2 pb-3 mt-1">
+        <h3 className="text-center">Player Leaderboards</h3>
+        <input className="mx-auto text-center w-50 h-50 form-control mb-2" type="search" placeholder="Search Username" onChange={handleSearchInput} />
+        {entries.length === 0 && <h5 className="text-center mt-3">No user found</h5>}
         {entries}
       </div>
       <p className="text-center my-2">Made by Nopey</p>

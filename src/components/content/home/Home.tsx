@@ -31,34 +31,34 @@ const Home = () => {
 
   return (
     <>
-      <div className="container p-2 bg-body rounded-bottom border border-top-0">
-        <div className="d-flex px-2">
-          <h3>Home</h3>
+      <div className="container p-2">
+        <div className="px-2">
+          <h3 className="text-center">Home</h3>
         </div>
         <div className="row">
-          <div className="col-sm mt-2">
-            <div className="card">
-              <h5 className="card-header">Top 10 Players</h5>
+          <div className="col-sm mb-4">
+            <div className="card shadow">
+              <h5 className="card-header text-center border-warning shadow-sm">Top 10 Players</h5>
               <div className="card-body">
                 <ul className="list-group list-group-flush">{user_list}</ul>
               </div>
             </div>
           </div>
-          <div className="col-sm mt-2">
-            <div className="card">
-              <h5 className="card-header">Newest Tracks</h5>
+          <div className="col-sm mb-4">
+            <div className="card shadow">
+              <h5 className="card-header text-center border-warning shadow-sm">Newest Tracks</h5>
               <div className="card-body">
                 <ul className="list-group list-group-flush">{track_list}</ul>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-2">
-          <div className="card">
-            <h5 className="card-header">Recent Activity</h5>
-            <div className="card-body">
-              <ul className="list-group list-group-flush"></ul>
-            </div>
+        <div className="card shadow">
+          <h5 className="card-header text-center border-warning shadow-sm">Recent Activity</h5>
+          <div className="card-body">
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">Maybe some day in the future</li>
+            </ul>
           </div>
         </div>
       </div>

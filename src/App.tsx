@@ -29,7 +29,7 @@ function App() {
   return (
     <>
       <Navigation showHome={showHome} showPlb={showPlb} onChange={changeMode}>
-        Frosthex Leaderboards
+        Nopeys Frosthex Tools
       </Navigation>
       {homeVisible && <Home></Home>}
       {plbVisible && <PlayerLeaderboards></PlayerLeaderboards>}
