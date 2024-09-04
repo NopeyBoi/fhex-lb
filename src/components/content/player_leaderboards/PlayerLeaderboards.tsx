@@ -21,7 +21,7 @@ const PlayerLeaderboards = () => {
     <>
       <div className="container p-2 pb-3 mt-1">
         <h3 className="text-center">Player Leaderboards</h3>
-        <input className="mx-auto text-center w-50 h-50 form-control mb-2" type="search" placeholder="Search Username" onChange={handleSearchInput} />
+        <input className="mx-auto text-center w-50 h-50 form-control mb-2" type="search" placeholder="Search User" onChange={handleSearchInput} />
         {entries.length === 0 && <h5 className="text-center mt-3">No user found</h5>}
         {entries}
       </div>

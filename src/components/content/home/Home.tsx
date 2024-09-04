@@ -1,5 +1,6 @@
 import userData from "../../../assets/fhex_data/user_data.json";
 import trackData from "../../../assets/fhex_data/track_data.json";
+import HomeCard from "./home_card/HomeCard";
 
 const Home = () => {
   const sortedUserData = Object.values(userData)
@@ -37,30 +38,21 @@ const Home = () => {
         </div>
         <div className="row">
           <div className="col-sm mb-4">
-            <div className="card shadow">
-              <h5 className="card-header text-center border-warning shadow-sm">Top 10 Players</h5>
-              <div className="card-body">
-                <ul className="list-group list-group-flush">{user_list}</ul>
-              </div>
-            </div>
+            <HomeCard content={user_list}>Top 10 Players</HomeCard>
           </div>
           <div className="col-sm mb-4">
-            <div className="card shadow">
-              <h5 className="card-header text-center border-warning shadow-sm">Newest Tracks</h5>
-              <div className="card-body">
-                <ul className="list-group list-group-flush">{track_list}</ul>
-              </div>
-            </div>
+            <HomeCard content={track_list}>Newest Tracks</HomeCard>
           </div>
         </div>
-        <div className="card shadow">
-          <h5 className="card-header text-center border-warning shadow-sm">Recent Activity</h5>
-          <div className="card-body">
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Maybe some day in the future</li>
-            </ul>
-          </div>
-        </div>
+        <HomeCard
+          content={[
+            <li key="none" className="list-group-item">
+              Maybe sometime in the future. ;)
+            </li>,
+          ]}
+        >
+          Recent Activity
+        </HomeCard>
       </div>
       <p className="text-center my-2">Made by Nopey</p>
     </>

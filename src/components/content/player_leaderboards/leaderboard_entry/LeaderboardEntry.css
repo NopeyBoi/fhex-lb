@@ -1,7 +1,7 @@
 #position {
-  width: 60px;
+  min-width: 60px;
 }
 
 #pp {
-  width: 126px;
+  min-width: 126px;
 }

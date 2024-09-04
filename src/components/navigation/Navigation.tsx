@@ -6,12 +6,12 @@ interface Props {
   children: ReactNode;
   showHome: () => void;
   showPlb: () => void;
+  showTrl: () => void;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Navigation = ({ children, showHome, showPlb, onChange }: Props) => {
+const Navigation = ({ children, onChange, showHome, showPlb, showTrl }: Props) => {
   const [cookies] = useCookies(["light_mode"]);
-
   const light_mode_names = ["Light Mode", "Burn Retina Mode", "Flashbang Mode", "Don't activate this"];
 
   return (
@@ -28,6 +28,9 @@ const Navigation = ({ children, showHome, showPlb, onChange }: Props) => {
             </a>
             <a className="nav-link" href="#" onClick={showPlb}>
               Player Leaderboards
+            </a>
+            <a className="nav-link" href="#" onClick={showTrl}>
+              Track List
             </a>
           </div>
           <form className="d-flex ms-auto">

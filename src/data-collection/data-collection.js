@@ -59,10 +59,15 @@ async function gather_data() {
         user_data[user.username]["pp"] = calcPP(user.time / 20, sr.time / 20);
         user_data[user.username]["uuid"] = user.player_uuid;
       }
-      track_data[track.command_name]["records"].push(user_data[user.username]);
+      track_data[track.command_name]["records"].push({
+        username: user.username,
+        pp: calcPP(user.time / 20, sr.time / 20),
+        uuid: user.player_uuid,
+        time: user.time,
+      });
     }
     count++;
-    //if (count >= 2) return;
+    //if (count >= 10) return;
   }
 }
 

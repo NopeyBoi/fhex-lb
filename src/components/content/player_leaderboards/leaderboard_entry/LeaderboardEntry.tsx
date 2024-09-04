@@ -13,7 +13,7 @@ const LeaderboardEntry = ({ position, username, pp }: Props) => {
         <span className="shadow border-end border-warning rounded-start text-center fw-bold" id="position">
           #{position}
         </span>
-        <span className="mx-3 fw-semibold" id="username">
+        <span className="mx-3 fw-semibold text-truncate" id="username">
           {username}
         </span>
         <span className="ms-auto shadow border-start border-warning rounded-end px-3 fw-bold text-end" id="pp">
