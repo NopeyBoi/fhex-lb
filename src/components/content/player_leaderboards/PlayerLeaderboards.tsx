@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import LeaderboardEntry from "./leaderboard_entry/LeaderboardEntry";
-import user_data from "../../../assets/fhex_data/user_data.json";
+import userData from "../../../assets/fhex_data/user_data.json";
 
 const PlayerLeaderboards = () => {
   const [inputText, setInputText] = useState("");
@@ -8,7 +8,7 @@ const PlayerLeaderboards = () => {
     setInputText(event.target.value.toLowerCase());
   };
 
-  const sortedData = Object.values(user_data).sort((a, b) => b.pp - a.pp);
+  const sortedData = Object.values(userData).sort((a, b) => b.pp - a.pp);
 
   const entries = [];
   for (let i = 0; i < 1000; i++) {
