@@ -50,14 +50,21 @@ async function gather_data() {
     track_data[track.command_name]["owner"] = track.owner;
     track_data[track.command_name]["tags"] = track.tags;
     track_data[track.command_name]["records"] = [];
+    var record_pos = 1;
     for (const user of track_info.top_list) {
       if (user.username in user_data) {
         user_data[user.username]["pp"] += calcPP(user.time / 20, sr.time / 20);
+        user_data[user.username]["records"].push({
+          track_name: track.command_name,
+          position: record_pos,
+          pp: calcPP(user.time / 20, sr.time / 20),
+        });
       } else {
         user_data[user.username] = {};
         user_data[user.username]["username"] = user.username;
         user_data[user.username]["pp"] = calcPP(user.time / 20, sr.time / 20);
         user_data[user.username]["uuid"] = user.player_uuid;
+        user_data[user.username]["records"] = [];
       }
       track_data[track.command_name]["records"].push({
         username: user.username,
