@@ -19,18 +19,17 @@ function App() {
 
   // Menu settings
   const [currentMenu, setCurrentMenu] = useState("home");
-  const [currentTrack, setCurrentTrack] = useState("");
-  const [currentPlayer, setCurrentPlayer] = useState("");
-
   const showMenu = (menu: string) => {
     setCurrentMenu(menu);
   };
 
+  const [currentTrack, setCurrentTrack] = useState("");
   const updateTrack = (trackName: string) => {
     setCurrentTrack(trackName);
     showMenu("tpf");
   };
 
+  const [currentPlayer, setCurrentPlayer] = useState("");
   const updatePlayer = (userName: string) => {
     setCurrentPlayer(userName);
     showMenu("ppf");
@@ -41,7 +40,7 @@ function App() {
       <Navigation onChangeMode={changeMode} onChangeMenu={showMenu}>
         Nopeys Frosthex Tools
       </Navigation>
-      {currentMenu === "home" && <Home />}
+      {currentMenu === "home" && <Home updateTrack={updateTrack} updateUser={updatePlayer} />}
       {currentMenu === "plb" && <PlayerLeaderboards update={updatePlayer} />}
       {currentMenu === "trl" && <TrackList update={updateTrack} />}
       {currentMenu === "tpf" && <TrackProfile trackName={currentTrack} update={updatePlayer} />}

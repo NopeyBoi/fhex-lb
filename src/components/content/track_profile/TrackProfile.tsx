@@ -1,29 +1,13 @@
 import HomeCard from "../home/home_card/HomeCard";
 import trackData from "../../../assets/fhex_data/track_data.json";
 import { convertTime } from "../../../utils/Utils";
+import { useEffect, useState } from "react";
+import { TrackData } from "../../../utils/Types";
 
 interface Props {
   trackName: string;
   update: (userName: string) => void;
 }
-
-type RecordData = {
-  pp: number;
-  uuid: string;
-  username: string;
-  time: number;
-};
-
-type TrackData = {
-  command_name: string;
-  display_name: string;
-  date_created: number;
-  type: string;
-  open: boolean;
-  owner: string;
-  tags: string[];
-  records: RecordData[];
-};
 
 const TrackProfile = ({ trackName, update }: Props) => {
   const track: TrackData = trackData[trackName as keyof typeof trackData];
@@ -41,11 +25,18 @@ const TrackProfile = ({ trackName, update }: Props) => {
     if (record_list.length >= 1000) break;
   }
 
+  const [author, setAuthor] = useState("");
+  useEffect(() => {
+    fetch("https://api.minetools.eu/uuid/" + track.owner)
+      .then((res) => res.json())
+      .then((data) => setAuthor(data.name));
+  }, [track]);
+
   return (
     <div className="container p-2 pb-3 mt-1">
       <h3 className="text-center">{trackName} Track Info</h3>
       <div className="card shadow mb-4">
-        <h5 className="card-header text-center border-warning shadow-sm">Made by {track.owner}</h5>
+        <h5 className="card-header text-center border-warning shadow-sm">Made by {author}</h5>
         <div className="d-flex">
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Created on</li>

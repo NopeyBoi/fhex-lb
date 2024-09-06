@@ -1,23 +1,11 @@
 import HomeCard from "../home/home_card/HomeCard";
 import userData from "../../../assets/fhex_data/user_data.json";
+import { UserData } from "../../../utils/Types";
 
 interface Props {
   userName: string;
   update: (trackName: string) => void;
 }
-
-type RecordData = {
-  track_name: string;
-  position: number;
-  pp: number;
-};
-
-type UserData = {
-  username: string;
-  pp: number;
-  uuid: string;
-  records: RecordData[];
-};
 
 const PlayerProfile = ({ userName, update }: Props) => {
   const user: UserData = userData[userName as keyof typeof userData];
