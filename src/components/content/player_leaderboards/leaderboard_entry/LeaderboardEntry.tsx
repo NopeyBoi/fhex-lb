@@ -1,15 +1,17 @@
+import { MouseEvent } from "react";
 import "./LeaderboardEntry.css";
 
 interface Props {
   position: number;
   username: string;
   pp: number;
+  onClick: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-const LeaderboardEntry = ({ position, username, pp }: Props) => {
+const LeaderboardEntry = ({ position, username, pp, onClick }: Props) => {
   return (
     <div className="bg-body rounded mx-2">
-      <div className="btn d-flex btn-outline-secondary rounded p-0 mt-1 text-body overflow-hidden">
+      <div className="btn d-flex btn-outline-secondary rounded p-0 mt-1 text-body overflow-hidden" onClick={onClick}>
         <span className="shadow border-end border-warning rounded-start text-center fw-bold" id="position">
           #{position}
         </span>

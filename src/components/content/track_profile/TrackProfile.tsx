@@ -1,5 +1,6 @@
 import HomeCard from "../home/home_card/HomeCard";
 import trackData from "../../../assets/fhex_data/track_data.json";
+import { convertTime } from "../../../utils/Utils";
 
 interface Props {
   trackName: string;
@@ -24,18 +25,6 @@ interface TrackData {
 }
 
 const TrackProfile = ({ trackName }: Props) => {
-  const convertTime = (time: number) => {
-    let result = "";
-    const ticks = time / 50;
-    const minutes = Math.floor(ticks / 20 / 60);
-    const seconds = Math.floor(ticks / 20 - minutes * 60);
-    const ms = (ticks - minutes * 60 * 20 - seconds * 20) * 50;
-
-    if (minutes > 0) result += minutes + ":";
-    result += seconds.toString().padStart(2, "0") + "." + ms.toString().padStart(3, "0");
-    return result;
-  };
-
   const track: TrackData = trackData[trackName as keyof typeof trackData];
   const sortedRecords = Object.values(track.records).sort((a, b) => b.pp - a.pp);
   const record_list = [];

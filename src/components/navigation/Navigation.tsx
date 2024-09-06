@@ -4,13 +4,11 @@ import "./Navigation.css";
 
 interface Props {
   children: ReactNode;
-  showHome: () => void;
-  showPlb: () => void;
-  showTrl: () => void;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeMenu: (menu: string) => void;
+  onChangeMode: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Navigation = ({ children, onChange, showHome, showPlb, showTrl }: Props) => {
+const Navigation = ({ children, onChangeMenu, onChangeMode }: Props) => {
   const [cookies] = useCookies(["light_mode"]);
   const light_mode_names = ["Light Mode", "Burn Retina Mode", "Flashbang Mode", "Don't activate this"];
 
@@ -23,19 +21,19 @@ const Navigation = ({ children, onChange, showHome, showPlb, showTrl }: Props) =
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="navbar-nav">
-            <a className="nav-link" href="#" onClick={showHome}>
+            <a className="nav-link" href="#" onClick={() => onChangeMenu("home")}>
               Home
             </a>
-            <a className="nav-link" href="#" onClick={showPlb}>
+            <a className="nav-link" href="#" onClick={() => onChangeMenu("plb")}>
               Player Leaderboards
             </a>
-            <a className="nav-link" href="#" onClick={showTrl}>
+            <a className="nav-link" href="#" onClick={() => onChangeMenu("trl")}>
               Track List
             </a>
           </div>
           <form className="d-flex ms-auto">
             <div className="form-check form-check-reverse form-switch m-2 ms-0">
-              <input className="form-check-input" type="checkbox" role="switch" id="switchLightMode" defaultChecked={cookies.light_mode} onChange={onChange}></input>
+              <input className="form-check-input" type="checkbox" role="switch" id="switchLightMode" defaultChecked={cookies.light_mode} onChange={onChangeMode}></input>
               <label className="form-check-label" htmlFor="switchLightMode">
                 {light_mode_names[Math.floor(Math.random() * light_mode_names.length)]}
               </label>
