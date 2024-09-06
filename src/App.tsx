@@ -33,7 +33,7 @@ function App() {
 
   const updatePlayer = (userName: string) => {
     setCurrentPlayer(userName);
-    showMenu("upf");
+    showMenu("ppf");
   };
 
   return (
@@ -44,8 +44,8 @@ function App() {
       {currentMenu === "home" && <Home />}
       {currentMenu === "plb" && <PlayerLeaderboards update={updatePlayer} />}
       {currentMenu === "trl" && <TrackList update={updateTrack} />}
-      {currentMenu === "tpf" && <TrackProfile trackName={currentTrack} />}
-      {currentMenu === "upf" && <PlayerProfile userName={currentPlayer} />}
+      {currentMenu === "tpf" && <TrackProfile trackName={currentTrack} update={updatePlayer} />}
+      {currentMenu === "ppf" && <PlayerProfile userName={currentPlayer} update={updateTrack} />}
     </>
   );
 }

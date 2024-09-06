@@ -4,16 +4,17 @@ import { convertTime } from "../../../utils/Utils";
 
 interface Props {
   trackName: string;
+  update: (userName: string) => void;
 }
 
-interface RecordData {
+type RecordData = {
   pp: number;
   uuid: string;
   username: string;
   time: number;
-}
+};
 
-interface TrackData {
+type TrackData = {
   command_name: string;
   display_name: string;
   date_created: number;
@@ -22,20 +23,20 @@ interface TrackData {
   owner: string;
   tags: string[];
   records: RecordData[];
-}
+};
 
-const TrackProfile = ({ trackName }: Props) => {
+const TrackProfile = ({ trackName, update }: Props) => {
   const track: TrackData = trackData[trackName as keyof typeof trackData];
   const sortedRecords = Object.values(track.records).sort((a, b) => b.pp - a.pp);
   const record_list = [];
   for (const record of sortedRecords) {
     record_list.push(
-      <li className="d-flex list-group-item" key={record.uuid}>
+      <a className="d-flex list-group-item" href="#" key={record.uuid} onClick={() => update(record.username)}>
         <span className="badge bg-body-secondary text-body-secondary me-2 px-3 py-2">#{record_list.length + 1}</span>
         <span className="text-truncate fw-bold">{record.username}</span>
         <span className="ms-auto fst-italic">{record.pp.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}pp</span>
         <span className="badge bg-body-secondary text-body-secondary ms-2 px-3 py-2">{convertTime(record.time)}</span>
-      </li>
+      </a>
     );
     if (record_list.length >= 1000) break;
   }
@@ -56,7 +57,7 @@ const TrackProfile = ({ trackName }: Props) => {
           </ul>
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Tags</li>
-            <li className="list-group-item h-100">{track.tags.join(" - ")}</li>
+            <li className="list-group-item h-100">{track.tags.length > 0 ? track.tags.join(" - ") : "NONE"}</li>
           </ul>
         </div>
       </div>
