@@ -1,5 +1,5 @@
 import HomeCard from "../home/home_card/HomeCard";
-import userData from "../../../assets/fhex_data/user_data.json";
+import userData from "../../../../public/fhex_data/user_data.json";
 import { UserData } from "../../../utils/Types";
 
 interface Props {

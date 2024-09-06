@@ -26,7 +26,7 @@ const PlayerLeaderboards = ({ update }: Props) => {
   useEffect(() => {
     const controller = new AbortController();
     const ent: JSX.Element[] = [];
-    fetch("src/assets/fhex_data/user_data.json")
+    fetch("public/fhex_data/user_data.json")
       .then((res) => res.json())
       .then((data: UserData[]) => {
         const sortedData = Object.values(data).sort((a, b) => b.pp - a.pp);

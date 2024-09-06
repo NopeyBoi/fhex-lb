@@ -26,7 +26,7 @@ const TrackList = ({ update }: Props) => {
   useEffect(() => {
     const controller = new AbortController();
     const ent: JSX.Element[] = [];
-    fetch("src/assets/fhex_data/track_data.json")
+    fetch("public/fhex_data/track_data.json")
       .then((res) => res.json())
       .then((data: TrackData[]) => {
         const sortedData = Object.values(data).sort((a, b) => b.records.length - a.records.length);

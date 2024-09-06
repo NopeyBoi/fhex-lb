@@ -1,5 +1,5 @@
 import HomeCard from "../home/home_card/HomeCard";
-import trackData from "../../../assets/fhex_data/track_data.json";
+import trackData from "../../../../public/fhex_data/track_data.json";
 import { convertTime } from "../../../utils/Utils";
 import { useEffect, useState } from "react";
 import { TrackData } from "../../../utils/Types";
