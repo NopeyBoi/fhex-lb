@@ -9,6 +9,8 @@ import TrackProfile from "./components/content/track_profile/TrackProfile";
 import PlayerProfile from "./components/content/player_profile/PlayerProfile";
 
 function App() {
+  const [render, rerender] = useState(false);
+  const searchParams = new URLSearchParams(window.location.search);
   // Light mode settings
   const [cookies, setCookie] = useCookies(["light_mode"]);
   if (cookies.light_mode) document.body.setAttribute("data-bs-theme", "light");
@@ -17,22 +19,24 @@ function App() {
     setCookie("light_mode", event.target.checked, { path: "/" });
   };
 
-  // Menu settings
-  const [currentMenu, setCurrentMenu] = useState("home");
   const showMenu = (menu: string) => {
-    setCurrentMenu(menu);
+    searchParams.set("menu", menu);
+    if (menu != "tpf" && menu != "ppf") searchParams.delete("info");
+    window.history.pushState(null, "", "?" + searchParams.toString());
   };
 
-  const [currentTrack, setCurrentTrack] = useState("");
   const updateTrack = (trackName: string) => {
-    setCurrentTrack(trackName);
+    searchParams.set("info", trackName);
     showMenu("tpf");
   };
 
-  const [currentPlayer, setCurrentPlayer] = useState("");
   const updatePlayer = (userName: string) => {
-    setCurrentPlayer(userName);
+    searchParams.set("info", userName);
     showMenu("ppf");
+  };
+
+  window.onpopstate = () => {
+    rerender(!render);
   };
 
   return (
@@ -40,11 +44,11 @@ function App() {
       <Navigation onChangeMode={changeMode} onChangeMenu={showMenu}>
         Nopeys Frosthex Tools
       </Navigation>
-      {currentMenu === "home" && <Home updateTrack={updateTrack} updateUser={updatePlayer} />}
-      {currentMenu === "plb" && <PlayerLeaderboards update={updatePlayer} />}
-      {currentMenu === "trl" && <TrackList update={updateTrack} />}
-      {currentMenu === "tpf" && <TrackProfile trackName={currentTrack} update={updatePlayer} />}
-      {currentMenu === "ppf" && <PlayerProfile userName={currentPlayer} update={updateTrack} />}
+      {(searchParams.get("menu") === "home" || searchParams.get("menu") === null) && <Home updateTrack={updateTrack} updateUser={updatePlayer} />}
+      {searchParams.get("menu") === "plb" && <PlayerLeaderboards update={updatePlayer} />}
+      {searchParams.get("menu") === "trl" && <TrackList update={updateTrack} />}
+      {searchParams.get("menu") === "tpf" && <TrackProfile trackName={searchParams.get("info") ?? ""} update={updatePlayer} />}
+      {searchParams.get("menu") === "ppf" && <PlayerProfile userName={searchParams.get("info") ?? ""} update={updateTrack} />}
     </>
   );
 }
