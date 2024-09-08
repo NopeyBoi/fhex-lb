@@ -81,11 +81,11 @@ async function gather_data() {
 }
 
 // Run every 10 minutes
-cron.schedule("* */10 * * * *", async () => {
-  // Getting the info here
-  await gather_data();
-  var user_json_string = JSON.stringify(user_data);
-  fs.writeFileSync("src/assets/fhex_data/user_data.json", user_json_string);
-  var track_json_string = JSON.stringify(track_data);
-  fs.writeFileSync("src/assets/fhex_data/track_data.json", track_json_string);
-});
+//cron.schedule("* */10 * * * *", async () => {
+// Getting the info here
+await gather_data();
+var user_json_string = JSON.stringify(user_data);
+fs.writeFileSync("src/assets/fhex_data/user_data.json", user_json_string);
+var track_json_string = JSON.stringify(track_data);
+fs.writeFileSync("src/assets/fhex_data/track_data.json", track_json_string);
+//});
