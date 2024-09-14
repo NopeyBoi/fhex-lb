@@ -1,5 +1,4 @@
 import HomeCard from "../home/home_card/HomeCard";
-import trackData from "../../../assets/fhex_data/track_data.json";
 import { convertTime } from "../../../utils/Utils";
 import { useEffect, useState } from "react";
 import { TrackData } from "../../../utils/Types";
@@ -10,8 +9,19 @@ interface Props {
 }
 
 const TrackProfile = ({ trackName, update }: Props) => {
-  const track: TrackData = trackData[trackName as keyof typeof trackData];
-  const sortedRecords = Object.values(track.records).sort((a, b) => b.pp - a.pp);
+  const [trackData, setTrackData] = useState<TrackData>({ command_name: "", display_name: "", date_created: 0, type: "", open: false, owner: "", tags: [], records: [] });
+  const [author, setAuthor] = useState("");
+
+  useEffect(() => {
+    fetch("http://45.131.66.225/tracks/" + trackName + ".json")
+      .then((res) => res.json())
+      .then((data) => setTrackData(data));
+    fetch("https://api.minetools.eu/uuid/" + trackData.owner)
+      .then((res) => res.json())
+      .then((data) => setAuthor(data.name));
+  }, [trackName, trackData]);
+
+  const sortedRecords = Object.values(trackData.records).sort((a, b) => b.pp - a.pp);
   const record_list = [];
   for (const record of sortedRecords) {
     record_list.push(
@@ -25,13 +35,6 @@ const TrackProfile = ({ trackName, update }: Props) => {
     if (record_list.length >= 1000) break;
   }
 
-  const [author, setAuthor] = useState("");
-  useEffect(() => {
-    fetch("https://api.minetools.eu/uuid/" + track.owner)
-      .then((res) => res.json())
-      .then((data) => setAuthor(data.name));
-  }, [track]);
-
   return (
     <div className="container p-2 pb-3 mt-1">
       <h3 className="text-center">{trackName} Track Info</h3>
@@ -40,15 +43,15 @@ const TrackProfile = ({ trackName, update }: Props) => {
         <div className="d-flex">
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Created on</li>
-            <li className="list-group-item h-100">{new Date(track.date_created * 1000).toLocaleDateString()}</li>
+            <li className="list-group-item h-100">{new Date(trackData.date_created * 1000).toLocaleDateString()}</li>
           </ul>
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Record count</li>
-            <li className="list-group-item h-100">{track.records.length.toLocaleString("en-US")}</li>
+            <li className="list-group-item h-100">{trackData.records.length.toLocaleString("en-US")}</li>
           </ul>
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Tags</li>
-            <li className="list-group-item h-100">{track.tags.length > 0 ? track.tags.join(" - ") : "NONE"}</li>
+            <li className="list-group-item h-100">{trackData.tags.length > 0 ? trackData.tags.join(" - ") : "NONE"}</li>
           </ul>
         </div>
       </div>

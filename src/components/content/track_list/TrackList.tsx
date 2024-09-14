@@ -1,22 +1,30 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import TrackListEntry from "./track_list_entry/TrackListEntry";
-import trackData from "../../../assets/fhex_data/track_data.json";
+import { TrackOverviewData } from "../../../utils/Types";
 
 interface Props {
   update: (trackName: string) => void;
 }
 
 const TrackList = ({ update }: Props) => {
+  const [trackData, setTrackData] = useState<TrackOverviewData[]>([]);
+
+  useEffect(() => {
+    fetch("http://45.131.66.225/track_overview.json")
+      .then((res) => res.json())
+      .then((data) => setTrackData(data));
+  }, []);
+
   const [inputText, setInputText] = useState("");
   const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value.toLowerCase());
   };
 
   const entries = [];
-  const sortedData = Object.values(trackData).sort((a, b) => b.records.length - a.records.length);
+  const sortedData = Object.values(trackData).sort((a, b) => b.record_count - a.record_count);
   for (const track of sortedData) {
     if (track.display_name.toLowerCase().includes(inputText)) {
-      entries.push(<TrackListEntry key={track.command_name} date={track.date_created} trackname={track.display_name} records={track.records.length} onClick={() => update(track.command_name)}></TrackListEntry>);
+      entries.push(<TrackListEntry key={track.command_name} date={track.date_created} trackname={track.display_name} records={track.record_count} onClick={() => update(track.command_name)}></TrackListEntry>);
     }
   }
 

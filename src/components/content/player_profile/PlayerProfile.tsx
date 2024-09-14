@@ -1,6 +1,6 @@
 import HomeCard from "../home/home_card/HomeCard";
-import userData from "../../../assets/fhex_data/user_data.json";
 import { UserData } from "../../../utils/Types";
+import { useEffect, useState } from "react";
 
 interface Props {
   userName: string;
@@ -8,11 +8,18 @@ interface Props {
 }
 
 const PlayerProfile = ({ userName, update }: Props) => {
-  const user: UserData = userData[userName as keyof typeof userData];
-  const server_records: number = user.records.reduce((a, c) => (c.position === 1 ? ++a : a), 0);
-  const top10s: number = user.records.reduce((a, c) => (c.position <= 10 ? ++a : a), 0);
+  const [userData, setUserData] = useState<UserData>({ username: "", pp: 0, uuid: "", records: [] });
 
-  const sortedRecords = Object.values(user.records).sort((a, b) => a.position - b.position);
+  useEffect(() => {
+    fetch("http://45.131.66.225/users/" + userName + ".json")
+      .then((res) => res.json())
+      .then((data) => setUserData(data));
+  }, [userName]);
+
+  const server_records: number = userData.records.reduce((a, c) => (c.position === 1 ? ++a : a), 0);
+  const top10s: number = userData.records.reduce((a, c) => (c.position <= 10 ? ++a : a), 0);
+
+  const sortedRecords = Object.values(userData.records).sort((a, b) => a.position - b.position);
   const record_list = [];
   for (const record of sortedRecords) {
     record_list.push(
@@ -27,9 +34,9 @@ const PlayerProfile = ({ userName, update }: Props) => {
 
   return (
     <div className="container p-2 pb-3 mt-1">
-      <h3 className="text-center">Player Profile</h3>
+      <h3 className="text-center">{userName}'s Profile</h3>
       <div className="card shadow mb-4">
-        <h5 className="card-header text-center border-warning shadow-sm">{userName}'s Info</h5>
+        <h5 className="card-header text-center border-warning shadow-sm">{userData.pp.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}pp</h5>
         <div className="d-flex">
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Server Records</li>
@@ -41,7 +48,7 @@ const PlayerProfile = ({ userName, update }: Props) => {
           </ul>
           <ul className="list-group list-group w-100 text-center">
             <li className="list-group-item fw-bold">Total Records</li>
-            <li className="list-group-item h-100">{user.records.length}</li>
+            <li className="list-group-item h-100">{userData.records.length}</li>
           </ul>
         </div>
       </div>
