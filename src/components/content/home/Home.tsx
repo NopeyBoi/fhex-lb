@@ -12,10 +12,10 @@ const Home = ({ updateTrack, updateUser }: Props) => {
   const [trackData, setTrackData] = useState<TrackOverviewData[]>([]);
 
   useEffect(() => {
-    fetch("https://45.131.66.225/track_overview.json")
+    fetch("https://fhex-data.nopey.online/track_overview.json")
       .then((res) => res.json())
       .then((data) => setTrackData(data));
-    fetch("https://45.131.66.225/user_overview.json")
+    fetch("https://fhex-data.nopey.online/user_overview.json")
       .then((res) => res.json())
       .then((data) => setUserData(data));
   }, []);
