@@ -10,7 +10,7 @@ const TrackList = ({ update }: Props) => {
   const [trackData, setTrackData] = useState<TrackOverviewData[]>([]);
 
   useEffect(() => {
-    fetch("http://45.131.66.225/track_overview.json")
+    fetch("https://45.131.66.225/track_overview.json")
       .then((res) => res.json())
       .then((data) => setTrackData(data));
   }, []);

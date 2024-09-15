@@ -11,7 +11,7 @@ const PlayerLeaderboards = ({ update }: Props) => {
   const [inputText, setInputText] = useState("");
 
   useEffect(() => {
-    fetch("http://45.131.66.225/user_overview.json")
+    fetch("https://45.131.66.225/user_overview.json")
       .then((res) => res.json())
       .then((data) => setUserData(data));
   }, []);

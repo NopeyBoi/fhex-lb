@@ -13,7 +13,7 @@ const TrackProfile = ({ trackName, update }: Props) => {
   const [author, setAuthor] = useState("");
 
   useEffect(() => {
-    fetch("http://45.131.66.225/tracks/" + trackName + ".json")
+    fetch("https://45.131.66.225/tracks/" + trackName + ".json")
       .then((res) => res.json())
       .then((data) => setTrackData(data));
     fetch("https://api.minetools.eu/uuid/" + trackData.owner)

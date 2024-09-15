@@ -11,7 +11,7 @@ const PlayerProfile = ({ userName, update }: Props) => {
   const [userData, setUserData] = useState<UserData>({ username: "", pp: 0, uuid: "", records: [] });
 
   useEffect(() => {
-    fetch("http://45.131.66.225/users/" + userName + ".json")
+    fetch("https://45.131.66.225/users/" + userName + ".json")
       .then((res) => res.json())
       .then((data) => setUserData(data));
   }, [userName]);
