@@ -14,7 +14,7 @@ const Home = ({ updateTrack, updateUser }: Props) => {
   const [trackLoading, setTrackLoading] = useState(true);
   const [cheatData, setCheatData] = useState<CheatSuspicionData[]>([]);
   const [cheatLoading, setCheatLoading] = useState(true);
-  const [cheatVisible, setCheatVisible] = useState(false);
+  const [cheatVisible, setCheatVisible] = useState(true);
 
   useEffect(() => {
     document.addEventListener("keydown", keyPressHandler, true);
