@@ -7,7 +7,7 @@ interface Props {
 
 const HomeCard = ({ children, content }: Props) => {
   return (
-    <div className="card shadow">
+    <div className="card shadow trans">
       <h5 className="card-header text-center border-warning shadow-sm">{children}</h5>
       <div className="card-body">
         <ul className="list-group list-group-flush">{content}</ul>

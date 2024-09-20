@@ -23,7 +23,7 @@ const PlayerProfile = ({ userName, update }: Props) => {
   const record_list = [];
   for (const record of sortedRecords) {
     record_list.push(
-      <a className="d-flex list-group-item" href="#" key={record.track_name} onClick={() => update(record.track_name)}>
+      <a className="d-flex list-group-item" href="#" key={record.track_name} onClick={() => update(record.command_name)}>
         <span className="badge bg-body-secondary text-body-secondary me-2 px-3 py-2">#{record.position}</span>
         <span className="text-truncate fw-bold">{record.track_name}</span>
         <span className="ms-auto fst-italic">{record.pp.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}pp</span>

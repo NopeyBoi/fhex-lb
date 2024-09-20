@@ -3,12 +3,14 @@ export type TrackOverviewData = {
   display_name: string;
   date_created: number;
   record_count: number;
+  cheated_sr: string;
 };
 
 export type UserOverviewData = {
   username: string;
   pp: number;
   uuid: string;
+  record_count: number;
 };
 
 export type TrackRecordData = {
@@ -21,6 +23,7 @@ export type TrackRecordData = {
 
 export type UserRecordData = {
   track_name: string;
+  command_name: string;
   position: number;
   pp: number;
 };
@@ -41,4 +44,10 @@ export type UserData = {
   pp: number;
   uuid: string;
   records: UserRecordData[];
+};
+
+export type CheatSuspicionData = {
+  username: string;
+  track_name: string;
+  reason: string;
 };
